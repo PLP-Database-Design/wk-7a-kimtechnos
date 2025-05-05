@@ -37,14 +37,14 @@ VALUES
 -- Step 1: Create the Orders table to store order-level information
 CREATE TABLE Orders (
     OrderID INT PRIMARY KEY,
-    CustomerName VARCHAR(100) NOT NULL
+    CustomerName VARCHAR(255) NOT NULL
 );
 
 -- Step 2: Create the OrderProducts table to store product-level information
-CREATE TABLE OrderProducts (
-    OrderID INT NOT NULL,
-    Product VARCHAR(100) NOT NULL,
-    Quantity INT NOT NULL,
+CREATE TABLE OrderDetails (
+    OrderID INT,
+    Product VARCHAR(255),
+    Quantity INT,
     PRIMARY KEY (OrderID, Product),
     FOREIGN KEY (OrderID) REFERENCES Orders(OrderID)
 );
@@ -56,6 +56,6 @@ SELECT DISTINCT OrderID, CustomerName
 FROM OrderDetails;
 
 -- Then insert all products into OrderProducts table
-INSERT INTO OrderProducts (OrderID, Product, Quantity)
+INSERT INTO OrderDetails (OrderID, Product, Quantity)
 SELECT OrderID, Product, Quantity
 FROM OrderDetails;
